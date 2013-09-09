@@ -1,0 +1,67 @@
+<html>
+<head></head>
+<body>
+    <form method="POST" action="http://t1.kidberries.com:8080/foper" enctype="multipart/form-data">
+	<label>xsl:
+		<textarea name="xml-xslt">
+<xsl:stylesheet
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
+  xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+    <xsl:template match ="/">
+        <fo:root>
+            <fo:layout-master-set>
+                <fo:simple-page-master master-name="job" page-width="21cm" page-height="29.7cm" margin="7mm 7mm 7mm 7mm">
+                    <fo:region-body/>
+                </fo:simple-page-master>
+            </fo:layout-master-set>
+
+            <fo:page-sequence master-reference="job">
+                <fo:flow flow-name="xsl-region-body" font-family="Arial">
+                    <fo:block>
+                        <xsl:call-template name="code128">
+                            <xsl:with-param name="string" select="/doc" />
+                        </xsl:call-template>
+                    </fo:block>
+                </fo:flow>
+            </fo:page-sequence>
+
+        </fo:root>
+    </xsl:template>
+
+    <xsl:template name="code128">
+        <xsl:param name="string" />
+
+        <fo:block>
+            <fo:instream-foreign-object>
+                <barcode:barcode xmlns:barcode="http://barcode4j.krysalis.org/ns" orientation="0">
+                    <xsl:attribute name="message"><xsl:value-of select="$string"/></xsl:attribute>
+                    <barcode:code128>
+                        <barcode:height>7mm</barcode:height>
+                        <!--barcode:module-width>0.21mm</barcode:module-width-->
+                        <!--barcode:codesets>ABC</barcode:codesets-->
+                        <barcode:quiet-zone enabled="false">10mw</barcode:quiet-zone>
+                        <barcode:human-readable>
+                            <barcode:placement>top</barcode:placement>
+                            <barcode:font-name>Helvetica</barcode:font-name>
+                            <barcode:font-size>5mm</barcode:font-size>
+                        </barcode:human-readable>
+                    </barcode:code128>
+                </barcode:barcode>
+            </fo:instream-foreign-object>
+        </fo:block>
+    </xsl:template>
+
+</xsl:stylesheet>
+		</textarea>
+	</label>
+	<label>xml:
+		<textarea name="xml">
+<doc>Hellow World!</doc>
+		</textarea>
+	</label>
+
+	<input type="submit" value="Send" />
+    </form>
+</body>
+</html>

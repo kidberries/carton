@@ -1,0 +1,494 @@
+<html>
+    <body>
+        <div id="content"><div id="mw-js-message" class="js-messagebox" style="display: none;"></div>
+            <a id="top"></a>
+            
+            <h1 class="firstHeading" id="firstHeading">Протокол взаимодействия с HTTP-сервисом FOP</h1>
+            <div id="bodyContent">
+                <div id="siteSub">Материал из DevelopersWiki</div>
+                <div id="contentSub"></div>
+                <div id="jump-to-nav">Перейти к: <a href="#column-one">навигация</a>, <a href="#searchInput">поиск</a></div>
+                <!-- start content -->
+        <div lang="ru" class="mw-content-ltr" dir="ltr"><table class="toc" id="toc"><tbody><tr><td><div id="toctitle"><h2>Содержание</h2><span class="toctoggle">&nbsp;[<a id="togglelink" class="internal" href="#">убрать</a>]&nbsp;</span></div>
+        <ul>
+        <li class="toclevel-1 tocsection-1"><a href="#.D0.97.D0.B0.D0.B3.D0.BE.D0.BB.D0.BE.D0.B2.D0.BA.D0.B8_POST"><span class="tocnumber">1</span> <span class="toctext">Заголовки POST</span></a>
+        <ul>
+        <li class="toclevel-2 tocsection-2"><a href="#.D0.97.D0.B0.D0.BF.D1.80.D0.BE.D1.81"><span class="tocnumber">1.1</span> <span class="toctext">Запрос</span></a></li>
+        <li class="toclevel-2 tocsection-3"><a href="#.D0.9E.D1.82.D0.B2.D0.B5.D1.82"><span class="tocnumber">1.2</span> <span class="toctext">Ответ</span></a>
+        <ul>
+        <li class="toclevel-3 tocsection-4"><a href="#.D0.A1.D0.BE.D0.BE.D0.B1.D1.89.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BE.D0.B1_.D0.BE.D1.88.D0.B8.D0.B1.D0.BA.D0.B5"><span class="tocnumber">1.2.1</span> <span class="toctext">Сообщение об ошибке</span></a></li>
+        </ul>
+        </li>
+        </ul>
+        </li>
+        <li class="toclevel-1 tocsection-5"><a href="#.D0.90.D0.BB.D0.B3.D0.BE.D1.80.D0.B8.D1.82.D0.BC_.D1.80.D0.B0.D0.B1.D0.BE.D1.82.D1.8B_.D1.81.D0.B5.D1.80.D0.B2.D0.BB.D0.B5.D1.82.D0.B0"><span class="tocnumber">2</span> <span class="toctext">Алгоритм работы сервлета</span></a></li>
+        <li class="toclevel-1 tocsection-6"><a href="#.D0.9F.D1.80.D0.B8.D0.BC.D0.B5.D1.80.D1.8B_.D1.82.D0.B5.D0.BB.D0.B0_.D0.B7.D0.B0.D0.BF.D1.80.D0.BE.D1.81.D0.B0_.D0.B4.D0.BB.D1.8F_multipart.2Fform-data"><span class="tocnumber">3</span> <span class="toctext">Примеры тела запроса для multipart/form-data</span></a></li>
+        <li class="toclevel-1 tocsection-7"><a href="#.D0.9B.D0.BE.D0.B3.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5"><span class="tocnumber">4</span> <span class="toctext">Логирование</span></a></li>
+        <li class="toclevel-1 tocsection-8"><a href="#.D0.A4.D0.BE.D1.80.D0.BC.D0.B0.D1.82_.D1.88.D0.B0.D0.B1.D0.BB.D0.BE.D0.BD.D0.B0_.D0.B4.D0.BB.D1.8F_ODT"><span class="tocnumber">5</span> <span class="toctext">Формат шаблона для ODT</span></a></li>
+        </ul>
+        </td></tr></tbody></table>
+        <h1><span class="editsection">[<a title="Править секцию: Заголовки POST" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=1">править</a>]</span> <span id=".D0.97.D0.B0.D0.B3.D0.BE.D0.BB.D0.BE.D0.B2.D0.BA.D0.B8_POST" class="mw-headline">Заголовки POST</span></h1>
+        <p>Перечисленные заголовки задаются клиентской библиотекой или вручную
+        </p>
+        <h2><span class="editsection">[<a title="Править секцию: Запрос" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=2">править</a>]</span> <span id=".D0.97.D0.B0.D0.BF.D1.80.D0.BE.D1.81" class="mw-headline">Запрос</span></h2>
+        <table border="1" style="border-collapse:collapse">
+        <tbody><tr>
+        <th>Заголовок
+        </th>
+        <th>Обязательный
+        </th>
+        <th>Описание
+        </th>
+        <th>Значение
+        </th></tr>
+        <tr>
+        <td>Accept-Charset
+        </td>
+        <td>Нет
+        </td>
+        <td>кодировка ответа (в случае ошибки, кодировка документа указывается в шаблоне)
+        </td>
+        <td>По-умолчанию UTF-8
+        </td></tr>
+        <tr>
+        <td>Host
+        </td>
+        <td>Да
+        </td>
+        <td>хост сервиса
+        </td>
+        <td>fop.nic.ru
+        </td></tr>
+        <tr>
+        <td>Connection
+        </td>
+        <td>Нет
+        </td>
+        <td>закрывать ли соединение после обработки запроса
+        </td>
+        <td>
+        <ul><li>close
+        </li><li>Keep-Alive
+        </li><li>значение по умолчанию: Keep-Alive
+        </li></ul>
+        </td></tr>
+        <tr>
+        <td>Content-Length
+        </td>
+        <td>Да
+        </td>
+        <td>Длина тела запроса
+        </td>
+        <td>Суммарное количество октетов в теле запроса
+        </td></tr>
+        <tr>
+        <td>Content-Type
+        </td>
+        <td>
+        <p>Нет
+        </p>
+        </td>
+        <td>Обозначение содержимого запроса
+        </td>
+        <td>
+        <ul><li>multipart/form-data; boundary=разделитель_частей
+        </li><li>text/xml
+        </li><li>text/xml-xslt
+        </li><li>text/xml-fo
+        </li></ul>
+        <p>charset ингорируется
+        </p>
+        </td></tr>
+        <tr>
+        <td>Accept
+        </td>
+        <td>Нет
+        </td>
+        <td>формат ответа.<br>
+        <p>Точное соответствие одному из значений в списке, иначе ответ по умолчанию
+        </p>
+        </td>
+        <td>
+        <ul><li>application/pdf (по умолчанию)
+        </li><li>application/xml-fo
+        </li><li>text/html
+        </li><li>application/vnd.oasis.opendocument.text
+        </li></ul>
+        </td></tr>
+        <tr>
+        <td>X-File-FO
+        </td>
+        <td>Нет
+        </td>
+        <td>Адрес файла с входными данными xml-fo
+        </td>
+        <td>
+        <ul><li>относительный путь к файлу (файл ищется в /tmp)
+        </li><li>абсолютный путь к файлу
+        </li><li>url (не ASCII символы передаются в закодированном виде)
+        </li></ul>
+        </td></tr>
+        <tr>
+        <td>X-File-XML
+        </td>
+        <td>Нет
+        </td>
+        <td>Адрес файла с входными данными xml
+        </td>
+        <td>
+        <ul><li>относительный путь к файлу (файл ищется в /tmp)
+        </li><li>абсолютный путь к файлу
+        </li><li>url (не ASCII символы передаются в закодированном виде)
+        </li></ul>
+        </td></tr>
+        <tr>
+        <td>X-File-XSL
+        </td>
+        <td>Нет
+        </td>
+        <td>Адрес файла с шаблоном преобразования xsl
+        </td>
+        <td>
+        <ul><li>относительный путь к файлу (файл ищется в /tmp)
+        </li><li>абсолютный путь к файлу
+        </li><li>url (не ASCII символы передаются в закодированном виде)
+        </li></ul>
+        </td></tr>
+        <tr>
+        <td>X-Request-Id
+        </td>
+        <td>Нет
+        </td>
+        <td>Уникальный идентификатор запроса
+        </td>
+        <td>согласно <a href="https://ctrl.nic.ru/wiki/index.php/Протокол_обмена_данными_на_основе_REST_для_внутреннего_взаимодействия_между_ФМ#.D0.9E.D1.81.D0.BE.D0.B1.D0.B5.D0.BD.D0.BD.D0.BE.D1.81.D1.82.D0.B8_.D0.B7.D0.B0.D0.B3.D0.BE.D0.BB.D0.BE.D0.B2.D0.BA.D0.B0_x-request-id" class="external text" rel="nofollow">описанию x-request-id</a>
+        </td></tr></tbody></table>
+        <p>Для работы сервиса необходимо передать xml, {xml и xsl} или fo. Если передаётся только xml, значит информация о том, где искать шаблон, должна находиться в инструкциях препроцессора (&lt;?xml-stylesheet href="<a href="http://2.fop.nicru:7676/catalog/template/%D0%A4%D0%B8%D0%BD%3A%3A%D0%A1%D1%87%D1%91%D1%82%20%28%D0%A0%D1%83%D1%81%29.xsl" class="external free" rel="nofollow">http://2.fop.nicru:7676/catalog/template/%D0%A4%D0%B8%D0%BD%3A%3A%D0%A1%D1%87%D1%91%D1%82%20%28%D0%A0%D1%83%D1%81%29.xsl</a>" type="text/xsl" title="fo" media="service"?&gt;).
+        </p><p><b>Порядок поиск данных XML:</b>
+        </p>
+        <ul><li>в теле запроса
+        <ul><li>Content-Type: text/xml
+        </li><li>Content-Type: multipart/form-data; boundary=разделитель_частей, подзаголовки Content-Disposition: form-data и Content-Type: text/xml
+        </li></ul>
+        </li><li>в файле, адрес ресурса &mdash; заголовок X-File-XML
+        </li><li>в файле, имя файла &mdash; параметр X-File-XML <a href="http://qwerty:1234/foper&amp;X-File-XML=qwerty.xml" class="external free" rel="nofollow">http://qwerty:1234/foper&amp;X-File-XML=qwerty.xml</a>
+        </li></ul>
+        <p><b>Порядок поиск данных XSL:</b>
+        </p>
+        <ul><li>в инструкциях препроцессора, см. выше
+        </li><li>в теле запроса
+        <ul><li>Content-Type: text/xml-xslt
+        </li><li>Content-Type: multipart/form-data; boundary=разделитель_частей, подзаголовки Content-Disposition: form-data и Content-Type: text/xml-xslt
+        </li></ul>
+        </li><li>в файле, адрес ресурса &mdash; заголовок X-File-XSL
+        </li><li>в файле, имя файла &mdash; параметр X-File-XSL <a href="http://qwerty:1234/foper&amp;X-File-XSL=qwerty.xsl" class="external free" rel="nofollow">http://qwerty:1234/foper&amp;X-File-XSL=qwerty.xsl</a>
+        </li><li>в файле, имя файла передаётся в url, файл ищется в папке /tmp. Например: <a href="http://qwerty:1234/foper/qwerty.xsl" class="external free" rel="nofollow">http://qwerty:1234/foper/qwerty.xsl</a>
+        </li></ul>
+        <p><b>Порядок поиск данных FO:</b>
+        </p>
+        <ul><li>в теле запроса
+        <ul><li>Content-Type: text/xml-fo
+        </li><li>Content-Type: multipart/form-data; boundary=разделитель_частей, подзаголовки Content-Disposition: form-data и Content-Type: text/xml-fo
+        </li></ul>
+        </li><li>в файле, адрес ресурса &mdash; заголовок X-File-FO
+        </li><li>в файле, имя файла &mdash; параметр X-File-FO <a href="http://qwerty:1234/foper&amp;X-File-FO=qwerty.xmlfo" class="external free" rel="nofollow">http://qwerty:1234/foper&amp;X-File-FO=qwerty.xmlfo</a>
+        </li></ul>
+        <p><b>Тело запроса в зависимости от Content-Type содержит</b>
+        </p>
+        <ul><li>text/xml-fo
+        </li><li>text/xml
+        </li><li>text/xml-xslt
+        </li><li><a href="http://ru.wikipedia.org/wiki/Multipart_form-data" class="external text" rel="nofollow">Multipart form-data</a> (Content-Type: multipart/form-data; boundary=разделитель_частей). Возможны следующие варианты:
+        <ul><li> Content-Disposition: form-data; name="xml"
+        </li><li> <i>2 части:</i> Content-Disposition: form-data; name="xml" <i>и</i> Content-Disposition: form-data; name="xml-xslt"
+        </li><li> Content-Disposition: form-data; name="xml-fo"
+        </li></ul>
+        </li></ul>
+        <p><b>Кодировка</b><br>
+        Заголовок запроса&nbsp;: поле Content-Type запроса POST или content-disposition части multipart. Charset не учитывается.
+        </p>
+        <ul><li> в преамбуле нет  - FOP-процессор считает, что encoding=UTF-8 (значение по умолчанию)
+        </li><li> в преамбуле есть - используется текущая преамбула
+        </li></ul>
+        <h2><span class="editsection">[<a title="Править секцию: Ответ" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=3">править</a>]</span> <span id=".D0.9E.D1.82.D0.B2.D0.B5.D1.82" class="mw-headline">Ответ</span></h2>
+        <table border="1" style="border-collapse:collapse">
+        <tbody><tr>
+        <th>Заголовок
+        </th>
+        <th>Описание
+        </th>
+        <th>Значение
+        </th></tr>
+        <tr>
+        <td>Date
+        </td>
+        <td>время ответа
+        </td>
+        <td>Thu, 08 Dec 2011 10:12:23 GMT
+        </td></tr>
+        <tr>
+        <td>Content-Type
+        </td>
+        <td>формат ответа и кодировка
+        </td>
+        <td>
+        <p>По-умолчанию application/pdf, иначе в зависимости от Accept запроса и от наличия ошибки
+        </p>
+        </td></tr>
+        <tr>
+        <td>Connection
+        </td>
+        <td>закрыто ли соединение после обработки запроса
+        </td>
+        <td>
+        <ul><li>close
+        </li><li>значение по умолчанию: Keep-Alive
+        </li></ul>
+        </td></tr>
+        <tr>
+        <td>Server
+        </td>
+        <td>Сервер
+        </td>
+        <td>Jetty(7.5.4.v20111024)
+        </td></tr>
+        <tr>
+        <td>X-Page-Count
+        </td>
+        <td>Количество листов в pdf или pcl файле
+        </td>
+        <td>целое число
+        </td></tr>
+        <tr>
+        <td>X-Request-Id
+        </td>
+        <td>Уникальный идентификатор запроса
+        </td>
+        <td>согласно <a href="https://ctrl.nic.ru/wiki/index.php/Протокол_обмена_данными_на_основе_REST_для_внутреннего_взаимодействия_между_ФМ#.D0.9E.D1.81.D0.BE.D0.B1.D0.B5.D0.BD.D0.BD.D0.BE.D1.81.D1.82.D0.B8_.D0.B7.D0.B0.D0.B3.D0.BE.D0.BB.D0.BE.D0.B2.D0.BA.D0.B0_x-request-id" class="external text" rel="nofollow">описанию x-request-id</a>
+        </td></tr></tbody></table>
+        <p>Тело ответа содержит сгенерированый файл или отчет о генерации при наличии ошибки.
+        </p>
+        <h3><span class="editsection">[<a title="Править секцию: Сообщение об ошибке" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=4">править</a>]</span> <span id=".D0.A1.D0.BE.D0.BE.D0.B1.D1.89.D0.B5.D0.BD.D0.B8.D0.B5_.D0.BE.D0.B1_.D0.BE.D1.88.D0.B8.D0.B1.D0.BA.D0.B5" class="mw-headline">Сообщение об ошибке</span></h3>
+        <ul><li>При ошибке HTTP - стандартными средствами HTTP (код, описание)
+        <ul><li> 400 Bad Request
+        </li><li> 406 Not Acceptable
+        </li><li> 500 Internal Server Error
+        </li><li> 501 Not Implemented
+        </li><li> 503 Service Unavailable
+        </li></ul>
+        </li><li>При ошибке генерации - отчет о генерации в теле ответа и заголовок Content-Type: text/plain; charset=UTF-8, код ответа 200. Так сделано для того, чтобы при прохождении ответа через сторонние proxy сообщение об ошибке не затиралось
+        </li></ul>
+        <h1><span class="editsection">[<a title="Править секцию: Алгоритм работы сервлета" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=5">править</a>]</span> <span id=".D0.90.D0.BB.D0.B3.D0.BE.D1.80.D0.B8.D1.82.D0.BC_.D1.80.D0.B0.D0.B1.D0.BE.D1.82.D1.8B_.D1.81.D0.B5.D1.80.D0.B2.D0.BB.D0.B5.D1.82.D0.B0" class="mw-headline">Алгоритм работы сервлета</span></h1>
+        <ul><li> Ищем, передали ли нам xml
+        <ul><li> Если xml передали
+        <ul><li> Выполняем инструкции препроцессора (список возможных заголовков: doCyrillicTages, fo. Файл с настройками находится в config/protocol.properties)
+        </li><li> Ищем, передали ли нам xsl
+        <ul><li> Если xsl передали, используем для результата подготовленных xml и xsl
+        </li><li> Если xsl не передали, используем для результата подготовленный xml
+        </li></ul>
+        </li></ul>
+        </li><li> Если xml не передали
+        <ul><li> Ищем fo
+        <ul><li> Если fo передали, используем fo для результата
+        </li><li> Если fo не передали, то ругаемся
+        </li></ul>
+        </li></ul>
+        </li></ul>
+        </li></ul>
+        <h1><span class="editsection">[<a title="Править секцию: Примеры тела запроса для multipart/form-data" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=6">править</a>]</span> <span id=".D0.9F.D1.80.D0.B8.D0.BC.D0.B5.D1.80.D1.8B_.D1.82.D0.B5.D0.BB.D0.B0_.D0.B7.D0.B0.D0.BF.D1.80.D0.BE.D1.81.D0.B0_.D0.B4.D0.BB.D1.8F_multipart.2Fform-data" class="mw-headline">Примеры тела запроса для multipart/form-data</span></h1>
+        <p>Content-Type: multipart/form-data; boundary=--7d015813802c4
+        </p>
+        <ul><li> fo
+        </li><li> xml
+        </li><li> xsl
+        </li><li> xsl+xml
+        </li></ul>
+        <p><a title="Mult body.rar" class="internal" href="/wiki/images/c/c0/Mult_body.rar">Медиа:mult_body.rar&lrm;</a>
+        </p><p>Пример запроса через wget
+        </p>
+        <pre>wget -vd --post-file '/tmp/xsl_xml.mult_body' \
+                 --output-document='/tmp/test.pdf' \
+                 --header='Content-Type: multipart/form-data; boundary=--7d015813802c4' \
+                 http://fop.nic.ru:8080/foper
+        </pre>
+        <h1><span class="editsection">[<a title="Править секцию: Логирование" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=7">править</a>]</span> <span id=".D0.9B.D0.BE.D0.B3.D0.B8.D1.80.D0.BE.D0.B2.D0.B0.D0.BD.D0.B8.D0.B5" class="mw-headline">Логирование</span></h1>
+        <p>/srvs/foper/jetty/log/ содержит следующие файлы:
+        </p>
+        <ul><li> fop.log* - логи процессора fop
+        </li><li> jetty.log* - логи jetty и сервлетов
+        </li><li> jetty_err_*.out - System.err
+        </li><li> jetty_out_*.out - System.out
+        </li><li> last_preprocessed.xml - последний xml, полученный в результате выполнения инструкции процессора xml-stylesheet title="doCyrillicTages"
+        </li><li> last_request.txt - url, свойства и заголовки последнего запроса
+        </li><li> last.result - последний возвращённый результат
+        </li></ul>
+        <h1><span class="editsection">[<a title="Править секцию: Формат шаблона для ODT" href="/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;action=edit&amp;section=8">править</a>]</span> <span id=".D0.A4.D0.BE.D1.80.D0.BC.D0.B0.D1.82_.D1.88.D0.B0.D0.B1.D0.BB.D0.BE.D0.BD.D0.B0_.D0.B4.D0.BB.D1.8F_ODT" class="mw-headline">Формат шаблона для ODT</span></h1>
+        <p>Open Document Text -- zip архив примерно следующего содержания
+        </p>
+        <ul><li> mimetype
+        </li><li> meta.xml
+        </li><li> content.xml
+        </li><li> styles.xml
+        </li><li> settings.xml
+        </li><li> media/border.png
+        </li><li> media/signature.png
+        </li><li> META-INF/manifest.xml
+        </li></ul>
+        <p>Содержимое практически всех файлов, кроме mimetype и META-INF/manifest.xml задаётся в шаблоне.
+        </p><p>Пример шаблона:
+        </p>
+        <pre>  &lt;xsl:stylesheet version="1.0" 
+                        xmlns:xalan="http://xml.apache.org/xalan"
+                        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                         xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" 
+                         xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" 
+                         xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" 
+                         xmlns:dc="http://purl.org/dc/elements/1.1/" 
+                         xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" 
+                         xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" 
+                         xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" 
+                         xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" 
+                         xmlns:math="http://www.w3.org/1998/Math/MathML" 
+                         xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" 
+                         xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" 
+                         xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" 
+                         xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" 
+                         xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" 
+                         xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" 
+                         xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+                         xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" 
+                         xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" 
+                         xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" 
+                         xmlns:xforms="http://www.w3.org/2002/xforms" 
+                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                        exclude-result-prefixes="xsl xalan"&gt;
+            &lt;xsl:output method="xml"
+                    encoding="utf-8"
+                    indent="yes"
+            xalan:indent-amount="2"/&gt;
+            &lt;xsl:template match="/request"&gt;
+              &lt;odt&gt;
+
+                &lt;!-- Содержимое content.xml --&gt;
+                &lt;content&gt;
+                  &lt;office:document-content&gt;
+                    &lt;office:font-face-decls/&gt;
+                    &lt;office:automatic-styles/&gt;
+                    &lt;office:body&gt;
+                      &lt;office:text text:use-soft-page-breaks="true"&gt;
+                        &lt;text:p&gt;Содержимое документа&lt;/text:p&gt;
+                      &lt;/office:text&gt;
+                    &lt;/office:body&gt;
+                  &lt;/office:document-content&gt;
+                &lt;/content&gt;
+
+                &lt;!-- Содержимое styles.xml --&gt;
+                &lt;styles&gt;
+                  &lt;office:document-styles&gt;
+                    &lt;office:font-face-decls/&gt;
+                    &lt;office:styles/&gt;
+                    &lt;office:automatic-styles/&gt;
+                    &lt;office:master-styles&gt;
+                      &lt;style:master-page&gt;
+                        &lt;style:header&gt;
+                          &lt;text:p&gt;Верхний колонтитул&lt;/text:p&gt;
+                        &lt;/style:header&gt;
+                        &lt;style:footer&gt;
+                          &lt;text:p&gt;Нижний колонтитул&lt;/text:p&gt;
+                        &lt;/style:footer&gt;
+                      &lt;/style:master-page&gt;
+                    &lt;/office:master-styles&gt;
+                  &lt;/office:document-styles&gt;
+                &lt;/styles&gt;
+
+                &lt;!-- Картинки и пр. файлы, которые необходимо включить в odt--&gt;
+                &lt;media&gt;
+                  &lt;multimedia-sources&gt;
+                    &lt;source name="media/border.gif" media-type="image/gif"&gt;
+                      &lt;xsl:value-of select="org/logo/background"/&gt;
+                    &lt;/source&gt;
+                    &lt;source name="media/signature.gif" media-type="image/gif"&gt;
+                      &lt;xsl:value-of select="org/manager/signature"/&gt;
+                    &lt;/source&gt;
+                  &lt;/multimedia-sources&gt;
+                &lt;/media&gt;
+
+                &lt;!-- Содержимое settings.xml --&gt;
+                &lt;settings&gt;
+                  &lt;office:document-settings office:version="1.1"/&gt;
+                &lt;/settings&gt;
+
+                &lt;!-- Содержимое meta.xml --&gt;
+                &lt;meta&gt;
+                  &lt;office:document-meta&gt;
+                    &lt;office:meta&gt;
+                      &lt;meta:generator&gt;Ru-center/java&lt;/meta:generator&gt;
+                      &lt;meta:initial-creator&gt;Ru-center/java&lt;/meta:initial-creator&gt;
+                      &lt;dc:creator&gt;Ru-center/java&lt;/dc:creator&gt;
+                      &lt;meta:creation-date&gt;
+                        &lt;xsl:value-of xmlns:java="http://xml.apache.org/xslt/java" select="java:format(java:java.text.SimpleDateFormat.new('dd.MM.yyyy'), java:java.util.Date.new())"/&gt;
+                      &lt;/meta:creation-date&gt;
+                      &lt;dc:date&gt;
+                        &lt;xsl:value-of xmlns:java="http://xml.apache.org/xslt/java" select="java:format(java:java.text.SimpleDateFormat.new('dd.MM.yyyy'), java:java.util.Date.new())"/&gt;
+                      &lt;/dc:date&gt;
+                    &lt;/office:meta&gt;
+                  &lt;/office:document-meta&gt;
+                &lt;/meta&gt;
+              &lt;/odt&gt;
+            &lt;/xsl:template&gt;
+          &lt;/xsl:stylesheet&gt;
+        </pre>
+        <p>После обработки xml таким шаблоном должен получиться документ следующего вида, из которого собирается odt
+        </p>
+        <pre>  &lt;odt
+                         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                         xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" 
+                         xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" 
+                         xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" 
+                         xmlns:dc="http://purl.org/dc/elements/1.1/" 
+                         xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" 
+                         xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" 
+                         xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" 
+                         xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" 
+                         xmlns:math="http://www.w3.org/1998/Math/MathML" 
+                         xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" 
+                         xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" 
+                         xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" 
+                         xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" 
+                         xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" 
+                         xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" 
+                         xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+                         xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" 
+                         xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" 
+                         xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" 
+                         xmlns:xforms="http://www.w3.org/2002/xforms" &gt;
+            &lt;!-- Содержимое content.xml --&gt;
+            &lt;content&gt;&lt;/content&gt;
+            &lt;!-- Содержимое styles.xml --&gt;
+            &lt;styles&gt;&lt;/styles&gt;
+            &lt;!-- Картинки и пр. файлы, которые необходимо включить в odt--&gt;
+            &lt;media&gt;&lt;/media&gt;
+            &lt;!-- Содержимое settings.xml --&gt;
+            &lt;settings&gt;&lt;/settings&gt;
+            &lt;!-- Содержимое meta.xml --&gt;
+            &lt;meta&gt;&lt;/meta&gt;
+          &lt;/odt&gt;
+        </pre>
+
+        <!-- 
+        NewPP limit report
+        Preprocessor node count: 46/1000000
+        Post-expand include size: 0/2097152 bytes
+        Template argument size: 0/2097152 bytes
+        Expensive parser function count: 0/100
+        -->
+
+        <!-- Saved in parser cache with key wiki-mw_:pcache:idhash:2309-0!*!*!!ru!*!* and timestamp 20130620074842 -->
+        </div><div class="printfooter">
+        Источник &mdash; «<a href="https://ctrl.nic.ru/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;oldid=19308">https://ctrl.nic.ru/wiki/index.php?title=%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB_%D0%B2%D0%B7%D0%B0%D0%B8%D0%BC%D0%BE%D0%B4%D0%B5%D0%B9%D1%81%D1%82%D0%B2%D0%B8%D1%8F_%D1%81_HTTP-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%BC_FOP&amp;oldid=19308</a>»</div>
+                <div class="catlinks" id="catlinks"><div id="mw-normal-catlinks"><a title="Служебная:Categories" href="/wiki/index.php/%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F:Categories">Категория</a>: <ul><li><a title="Категория:Система подготовки бумажных почтовых отправлений" href="/wiki/index.php/%D0%9A%D0%B0%D1%82%D0%B5%D0%B3%D0%BE%D1%80%D0%B8%D1%8F:%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B8_%D0%B1%D1%83%D0%BC%D0%B0%D0%B6%D0%BD%D1%8B%D1%85_%D0%BF%D0%BE%D1%87%D1%82%D0%BE%D0%B2%D1%8B%D1%85_%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9">Система подготовки бумажных почтовых отправлений</a></li></ul></div></div>		<!-- end content -->
+                        <div class="visualClear"></div>
+            </div>
+        </div>
+    </body>
+</html>

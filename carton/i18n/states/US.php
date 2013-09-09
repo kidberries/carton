@@ -1,0 +1,73 @@
+<?php
+/**
+ * United States
+ *
+ * @author 		CartonThemes
+ * @category 	i18n
+ * @package 	CartoN/i18n
+ * @version     2.0.0
+ */
+global $states;
+
+$states['US'] = array(
+	'AL' => __( 'Alabama', 'carton' ),
+	'AK' => __( 'Alaska', 'carton' ),
+	'AZ' => __( 'Arizona', 'carton' ),
+	'AR' => __( 'Arkansas', 'carton' ),
+	'CA' => __( 'California', 'carton' ),
+	'CO' => __( 'Colorado', 'carton' ),
+	'CT' => __( 'Connecticut', 'carton' ),
+	'DE' => __( 'Delaware', 'carton' ),
+	'DC' => __( 'District Of Columbia', 'carton' ),
+	'FL' => __( 'Florida', 'carton' ),
+	'GA' => __( 'Georgia', 'carton' ),
+	'HI' => __( 'Hawaii', 'carton' ),
+	'ID' => __( 'Idaho', 'carton' ),
+	'IL' => __( 'Illinois', 'carton' ),
+	'IN' => __( 'Indiana', 'carton' ),
+	'IA' => __( 'Iowa', 'carton' ),
+	'KS' => __( 'Kansas', 'carton' ),
+	'KY' => __( 'Kentucky', 'carton' ),
+	'LA' => __( 'Louisiana', 'carton' ),
+	'ME' => __( 'Maine', 'carton' ),
+	'MD' => __( 'Maryland', 'carton' ),
+	'MA' => __( 'Massachusetts', 'carton' ),
+	'MI' => __( 'Michigan', 'carton' ),
+	'MN' => __( 'Minnesota', 'carton' ),
+	'MS' => __( 'Mississippi', 'carton' ),
+	'MO' => __( 'Missouri', 'carton' ),
+	'MT' => __( 'Montana', 'carton' ),
+	'NE' => __( 'Nebraska', 'carton' ),
+	'NV' => __( 'Nevada', 'carton' ),
+	'NH' => __( 'New Hampshire', 'carton' ),
+	'NJ' => __( 'New Jersey', 'carton' ),
+	'NM' => __( 'New Mexico', 'carton' ),
+	'NY' => __( 'New York', 'carton' ),
+	'NC' => __( 'North Carolina', 'carton' ),
+	'ND' => __( 'North Dakota', 'carton' ),
+	'OH' => __( 'Ohio', 'carton' ),
+	'OK' => __( 'Oklahoma', 'carton' ),
+	'OR' => __( 'Oregon', 'carton' ),
+	'PA' => __( 'Pennsylvania', 'carton' ),
+	'RI' => __( 'Rhode Island', 'carton' ),
+	'SC' => __( 'South Carolina', 'carton' ),
+	'SD' => __( 'South Dakota', 'carton' ),
+	'TN' => __( 'Tennessee', 'carton' ),
+	'TX' => __( 'Texas', 'carton' ),
+	'UT' => __( 'Utah', 'carton' ),
+	'VT' => __( 'Vermont', 'carton' ),
+	'VA' => __( 'Virginia', 'carton' ),
+	'WA' => __( 'Washington', 'carton' ),
+	'WV' => __( 'West Virginia', 'carton' ),
+	'WI' => __( 'Wisconsin', 'carton' ),
+	'WY' => __( 'Wyoming', 'carton' ),
+	'AA' => __( 'Armed Forces (AA)', 'carton' ),
+	'AE' => __( 'Armed Forces (AE)', 'carton' ),
+	'AP' => __( 'Armed Forces (AP)', 'carton' ),
+	'AS' => __( 'American Samoa', 'carton' ),
+	'GU' => __( 'Guam', 'carton' ),
+	'MP' => __( 'Northern Mariana Islands', 'carton' ),
+	'PR' => __( 'Puerto Rico', 'carton' ),
+	'UM' => __( 'US Minor Outlying Islands', 'carton' ),
+	'VI' => __( 'US Virgin Islands', 'carton' ),
+);
